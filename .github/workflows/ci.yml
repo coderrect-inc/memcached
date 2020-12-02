@@ -19,3 +19,12 @@ jobs:
         make -j
     - name: Test
       run: PARALLEL=5 make test
+    - name: coderrect setup
+      run: |
+        wget https://public-installer-pkg.s3.us-east-2.amazonaws.com/coderrect-linux-hpc-0.9.1.tar.gz
+        tar zxf coderrect-linux-hpc-0.9.1.tar.gz
+        echo "::add-path::$PWD/coderrect-linux-hpc-0.9.1/bin"
+    - name: coderrect make
+      run: coderrect -analyzeAllBinaries make -j
+    - name: coderrect check
+      run: coderrect -publishResults -report.host=DEFAULT
