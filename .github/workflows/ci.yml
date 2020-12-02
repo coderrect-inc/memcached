@@ -17,8 +17,6 @@ jobs:
         ./autogen.sh
         ./configure --enable-seccomp --enable-tls --enable-sasl --enable-sasl-pwdb
         make -j
-    - name: Test
-      run: PARALLEL=5 make test
     - name: coderrect setup
       run: |
         wget https://public-installer-pkg.s3.us-east-2.amazonaws.com/coderrect-linux-hpc-0.9.1.tar.gz
