@@ -5384,6 +5384,7 @@ int main (int argc, char **argv) {
     }
 
     printf("hello world");
+    printf("hello world");
 
     if (settings.slab_chunk_size_max > settings.item_size_max) {
         fprintf(stderr, "slab_chunk_max (bytes: %d) cannot be larger than -I (item_size_max %d)\n",
