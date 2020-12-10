@@ -18,4 +18,4 @@ jobs:
         ./configure --enable-seccomp --enable-tls --enable-sasl --enable-sasl-pwdb
         make -j
     - name: coderrect scan
-      uses: coderrect-inc/coderrect-github-action@v0.4
+      uses: coderrect-inc/coderrect-github-action@v1.0
