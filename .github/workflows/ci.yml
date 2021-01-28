@@ -1,6 +1,33 @@
 name: GitHub CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+    inputs:
+      buildCommand:
+        description: 'Build Command'     
+        required: false
+        default: "make -j"
+      cleanCommand:
+        description: 'Clean Command'     
+        required: false
+        default: "make clean || true"
+      buildPath:
+        description: 'Build Path'     
+        required: false
+        default: "."
+      options:
+        description: 'Coderrect Option Flags'     
+        required: false
+        default: "-analyzeAllBinaries"
+      exit0:
+        description: 'Whether exit with 0 when races detected'     
+        required: false
+        default: false
+  
 
 jobs:
   ubuntu-build-test:
@@ -19,3 +46,9 @@ jobs:
         make -j8
     - name: coderrect scan
       uses: coderrect-inc/coderrect-github-action@main
+      with:
+        buildCommand: ${{ github.event.buildCommand }}
+        cleanCommand: ${{ github.event.cleanCommand }}
+        buildPath: ${{ github.event.buildPath }}
+        options: ${{ github.event.options }}
+        exit0: ${{ github.event.exit0 }}
